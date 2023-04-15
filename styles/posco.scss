@@ -1,0 +1,81 @@
+$color1:#0f6e38;
+$color2:#0d278d;
+$color3:#fff;
+$color4:#000;
+$color5:#555;
+
+@mixin layout {width:1400px; margin:0 auto;}
+@mixin flex-row-between{
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content: space-between;
+}
+
+body {height:10000px;}
+header {
+    background-color: pink;
+    @include layout; height:120px;
+    @include flex-row-between(); 
+    align-items:center;
+    position:fixed; left:50%; top:0; z-index:999; transform:translate(-50%,0);
+    h1 {
+        // background:yellow;
+        a {img {width:100%;}}
+    }
+    nav {
+        background-color: #0f6e38;
+        .gnb {
+        display:flex;
+        > li {
+            display:flex; position:relative;
+            > a {
+                width:200px; 
+                line-height:120px;
+                background-color: aqua;
+                text-transform:uppercase;
+            }
+            .sub {
+                background-color:$color3;
+                position:absolute; top:120px; width:100%; height:300px;
+                background-color: lightblue;
+                    a{
+                    padding:15px; display:block;
+                    }
+                }
+            }
+            //서브 배경 만드는 방법1.
+            //js 설정 시 display 기능 가능, height 애니메이션 x 
+            // .sub::before {
+            //     content:''; display:block; height:100%; width:10000%; background-color: $color3;
+            //     position:absolute; left:-600%; top:0; z-index:-888;
+            // }
+        }
+        .bg {
+            background-color: pink;
+            height:320px; width:1000%; 
+            position:absolute; left:-50%; top:100px; z-index:-888;
+        }
+    }
+}//e:header
+header::after {
+    content:''; display:block; height:100%; width:10000%; background-color: $color3;
+    position:absolute; left:-50%; top:0; z-index:-888;
+}
+main {
+    .visual {
+        background: url(../images/posco/s01_bg.jpg) no-repeat;
+        background-size:cover; height:100vh; width:100%;
+        position:relative;
+        text-align: center;
+        h1 {
+            font-size:4rem; line-height:1.5; color:$color3; font-weight:800;
+            position:absolute; left:35%; top:35%;
+        }
+    }
+}
+main::after {
+    content:''; display:block;
+    position:absolute; left:0; top:0; z-index:777;
+    width:100%; height:100vh;
+    background:linear-gradient(90deg,$color2, transparent,$color1);
+}
